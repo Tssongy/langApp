@@ -1,18 +1,32 @@
-import { StyleSheet, Text, View } from 'react-native';
+import styled from "styled-components/native";
+import { useState } from "react";
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+const Box = styled.TouchableOpacity`
+  background-color: tomato;
+  width: 200px;
+  height: 200px;
+`;
 
 export default function App() {
+  const [y, setY] = useState(0);
+  const moveUp = () => {
+    setInterval(() => {
+      setY((prev) => prev + 1), 500;
+    });
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Container>
+      <Box
+        onPress={moveUp}
+        style={{
+          transform: [{ translateY: y }],
+        }}
+      />
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
